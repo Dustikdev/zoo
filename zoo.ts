@@ -1,29 +1,29 @@
 ﻿enum Biome { // разновидность биомов
-  tundra = "Tundra",
-  taiga = "Taiga",
-  deciduousForest = "DeciduousForest",
-  grasslands = "Grasslands",
-  desert = "Desert",
-  highPlateaus = "HighPlateaus",
-  tropicalForest = "TropicalForest",
+  tundra = 'Tundra',
+  taiga = 'Taiga',
+  deciduousForest = 'DeciduousForest',
+  grasslands = 'Grasslands',
+  desert = 'Desert',
+  highPlateaus = 'HighPlateaus',
+  tropicalForest = 'TropicalForest',
 }
 
 enum KindOfAnimal {
-  bear = "Bear",
-  giraffe = "Giraffe",
-  beaver = "Beaver",
-  dolphin = "Dolphin",
+  bear = 'Bear',
+  giraffe = 'Giraffe',
+  beaver = 'Beaver',
+  dolphin = 'Dolphin',
 }
 
 enum KindOfFood {
-  fish = "Fish",
-  leaf = "Leaf",
-  meat = "Meat",
+  fish = 'Fish',
+  leaf = 'Leaf',
+  meat = 'Meat',
 }
 
 enum Diet { //хищник или травоядный
-  predator = "Predator",
-  herbivorous = "Herbivorous",
+  predator = 'Predator',
+  herbivorous = 'Herbivorous',
 }
 
 interface Aviary {
@@ -35,7 +35,7 @@ interface Aviary {
 }
 
 interface Species {
-  //"вид" животного
+  //'вид' животного
   nameOfSpecies: KindOfAnimal;
   biome: Biome;
   waterNecessity: boolean;
@@ -76,10 +76,10 @@ function checkConditions(animal: Animal, aviary: Aviary): string[] {
     messages.push(`${aviary.square - square} meters are missing in the aviary`);
   }
   if (animal.biome !== aviary.biome) {
-    messages.push("biomes not matched");
+    messages.push('biomes not matched');
   }
   if (animal.waterNecessity && !aviary.waterPresence) {
-    messages.push("biome does not have water");
+    messages.push('biome does not have water');
   }
   return [...new Set(messages)];
 }
@@ -136,7 +136,7 @@ const bearMisha: Animal = {
   spaceNecessity: 50,
   kindOfFood: KindOfFood.meat,
   diet: Diet.predator,
-  name: "Misha",
+  name: 'Misha',
   dayFoodConsumption: 5,
 };
 
@@ -148,7 +148,7 @@ const bearMansur: Animal = {
   spaceNecessity: 50,
   kindOfFood: KindOfFood.meat,
   diet: Diet.predator,
-  name: "Mansur",
+  name: 'Mansur',
   dayFoodConsumption: 5,
 };
 const giraffeSemen: Animal = {
@@ -159,7 +159,7 @@ const giraffeSemen: Animal = {
   spaceNecessity: 70,
   kindOfFood: KindOfFood.leaf,
   diet: Diet.herbivorous,
-  name: "Semen",
+  name: 'Semen',
   dayFoodConsumption: 10,
 };
 
@@ -171,7 +171,7 @@ const giraffeNikita: Animal = {
   spaceNecessity: 80,
   kindOfFood: KindOfFood.leaf,
   diet: Diet.herbivorous,
-  name: "Nikita",
+  name: 'Nikita',
   dayFoodConsumption: 8,
 };
 
@@ -202,63 +202,120 @@ countDayFood();
 //in progress
 
 function showModalWindow() {
-  const modalWindow = document.querySelector(".modal-window");
+  const modalWindow = document.querySelector('.modal-window');
   if (modalWindow !== null) {
-    modalWindow.classList.add("visible");
+    modalWindow.classList.add('visible');
+  }
+}
+
+function cancelAdding() {
+  const modalWindow = document.querySelector('.modal-window');
+  const modalContainer = document.querySelector('.modal-container');
+  if (modalWindow !== null && modalContainer !== null) {
+    modalWindow.classList.remove('visible');
+    modalContainer.innerHTML = ''
   }
 }
 
 function createSelect(enumObj: Record<string, string>): string {
-  let selectString = '<select class="biome-select">';
+  let selectString = `<select class='biome-select'>`;
   for (const key in enumObj) {
-    selectString += `<option value="${enumObj[key]}">${enumObj[key]}</option>`;
+    selectString += `<option value='${enumObj[key]}'>${enumObj[key]}</option>`;
   }
-  selectString += "</select>";
+  selectString += '</select>';
   return selectString;
 }
 
 function addAnimal() {
-  const modalContainer = document.querySelector(".modal-container");
-  const markup = `<div class="images-container">
-<img src="./images/bear.jpg" alt="bear">
+  const modalContainer = document.querySelector('.modal-container');
+  const markup = `<div class='images-container'>
+<img src='./images/bear.jpg' alt='bear'>
 </div>
-<div class="question-container">
+<div class='question-container'>
 <span>What species?</span>
 ${createSelect(KindOfAnimal)}
 </div>
-<div class="question-container">
+<div class='question-container'>
 <span>Choose biome</span>
 ${createSelect(Biome)}
 </div>
-<div class="question-container">
+<div class='question-container'>
 <span>Is this animal need water?</span>
-<input type="text">
+<select class='biome-select'>
+<option value='Yes'>Yes</option>
+<option value='No'>No</option>
+</select>
 </div>
-<div class="question-container">
+<div class='question-container'>
 <span>How much space it need?</span>
-<input type="text">
+<input type='number'>
 </div>
-<div class="question-container">
+<div class='question-container'>
 <span>What kind of food prefer?</span>
 ${createSelect(KindOfFood)}
 </div>
-<div class="question-container">
+<div class='question-container'>
 <span>Is this predator or herbivorous</span>
 ${createSelect(Diet)}
 </div>
-<div class="question-container">
+<div class='question-container'>
 <span>What name?</span>
-<input type="text">
+<input type='text'>
 </div>
-<div class="question-container">
+<div class='question-container'>
 <span>How many food need every day?</span>
-<input type="number">
+<input type='number'>
+</div>
+<div class="bottom-buttons">
+<button class="confirm" onclick='confirmAdding()'>
+    Добавить
+</button>
+<button class="cancel" onclick='cancelAdding()'>
+    Отменить
+</button>
 </div>`;
   if (modalContainer !== null) {
-    modalContainer.insertAdjacentHTML("afterbegin", markup);
+    modalContainer.insertAdjacentHTML('afterbegin', markup);
     // modalContainer.innerHTML = markup;
   } else {
-    console.log("modal-container not found");
+    console.log('modal-container not found');
+  }
+  showModalWindow();
+}
+
+function addAviary() {
+  const modalContainer = document.querySelector('.modal-container');
+  const markup = `<div class='images-container'>
+<img src='./images/grasslands.jpg' alt='grasslands'>
+</div>
+<div class='question-container'>
+<span>Choose biome</span>
+${createSelect(Biome)}
+</div>
+<div class='question-container'>
+<span>Does this biome have water?</span>
+<select class='biome-select'>
+<option value='Yes'>Yes</option>
+<option value='No'>No</option>
+</select>
+</div>
+<div class='question-container'>
+<span>What is the area?</span>
+<input type='number'>
+</div>
+<div class="bottom-buttons">
+<button class="confirm" onclick='confirmAdding()'>
+    Добавить
+</button>
+<button class="cancel" onclick='cancelAdding()'>
+    Отменить
+</button>
+</div>`;
+  if (modalContainer !== null) {
+    modalContainer.insertAdjacentHTML('afterbegin', markup);
+    // modalContainer.innerHTML = markup;
+  } else {
+    console.log('modal-container not found');
   }
   showModalWindow();
 }
