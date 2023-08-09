@@ -1,12 +1,53 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zoo</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="modal-window">
+        <div class="modal-container">
+            <div class="bottom-buttons">
+                <button class="confirm" onclick='confirmAdding()'>
+                    Добавить
+                </button>
+                <button class="cancel" onclick='cancelAdding()'>
+                    Отменить
+                </button>
+            </div>
+        </div>
+    </div>
+    <h1>Zoo</h1>
+    <section>
+      <div class="animals-container">
+        <div class="buttons">
+          <button title="add" class="button" onclick="addAnimal()">
+            <img src="./images/plus-button.svg" alt="add-button" />
+          </button>
+          <button title="remove" class="button">
+            <img src="./images/remove-button.svg" alt="remove-button" onclick="removeAnimal()"/>
+          </button>
+        </div>
+        <div class="animals">
+        </div>
+      </div>
+      <div class="aviaries-container">
+        <div class="buttons">
+          <button title="add" class="button">
+            <img src="./images/plus-button.svg" alt="add-button" onclick="addAviary()"/>
+          </button>
+          <button title="remove" class="button">
+            <img src="./images/remove-button.svg" alt="remove-button" onclick="removeAviary()"/>
+          </button>
+        </div>
+        <div class="aviaries">
+
+        </div>
+      </div>
+    </section>
     <script src="./zoo.js"></script>
-</body>
+  </body>
 </html>
