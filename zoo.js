@@ -13,7 +13,6 @@ var Diet;
     Diet["predator"] = "predator";
     Diet["herbivorous"] = "herbivorous";
 })(Diet || (Diet = {}));
-var zooPark = [];
 function checkConditions(animal, aviary) {
     var messages = [];
     var square = 0;
@@ -60,6 +59,21 @@ function addRemoveAnimal(animal, aviary) {
     }
     console.log(aviary.arrayOfAnimals.length);
 }
+function addAviaryToZoo(aviary) {
+    zoo.push(aviary);
+}
+function countDayFood() {
+    var sum = 0;
+    for (var _i = 0, zoo_1 = zoo; _i < zoo_1.length; _i++) {
+        var aviary = zoo_1[_i];
+        for (var _a = 0, _b = aviary.arrayOfAnimals; _a < _b.length; _a++) {
+            var item = _b[_a];
+            sum += item.dayFoodConsumption;
+        }
+    }
+    console.log("You need ".concat(sum, " food for all zoo every day"));
+}
+var zoo = [];
 var bearMisha = {
     id: 1,
     nameOfSpecies: "bear",
@@ -113,11 +127,14 @@ var tundraWithWater = {
 var grasslandsWithoutWater = {
     biome: Biome.Grasslands,
     waterPresence: true,
-    square: 100,
+    square: 200,
     arrayOfAnimals: [],
 };
+addAviaryToZoo(tundraWithWater);
+addAviaryToZoo(grasslandsWithoutWater);
 addRemoveAnimal(bearMisha, tundraWithWater);
-addRemoveAnimal(bearMansur, tundraWithWater);
+// addRemoveAnimal(bearMansur, tundraWithWater);
 addRemoveAnimal(bearMansur, tundraWithWater);
 addRemoveAnimal(giraffeSemen, grasslandsWithoutWater);
 addRemoveAnimal(giraffeNikita, grasslandsWithoutWater);
+countDayFood();

@@ -1,4 +1,4 @@
-﻿enum Biome {
+﻿enum Biome { // разновидность биомов
   Tundra = "Tundra",
   Taiga = "Taiga",
   DeciduousForest = "DeciduousForest",
@@ -8,21 +8,19 @@
   TropicalForest = "TropicalForest",
 }
 
-enum Diet {
+enum Diet { //хищник или травоядный
   predator = "predator",
   herbivorous = "herbivorous",
 }
 
-let zooPark: Aviary[] = [];
-
-interface Aviary {
+interface Aviary { //вольер
   biome: Biome;
   waterPresence: boolean;
   square: number;
   arrayOfAnimals: Animal[];
 }
 
-interface Species {
+interface Species { //"вид" животного
   nameOfSpecies: string;
   biome: Biome;
   waterNecessity: boolean;
@@ -31,13 +29,13 @@ interface Species {
   diet: Diet;
 }
 
-interface Animal extends Species {
+interface Animal extends Species { //сами конкретные животные
   id: number;
   name: string;
   dayFoodConsumption: number;
 }
 
-function checkConditions(animal: Animal, aviary: Aviary): string[] {
+function checkConditions(animal: Animal, aviary: Aviary): string[] { //функция для проверки на все условия
   let messages: string[] = [];
   let square: number = 0;
   for (let i = 0; i < aviary.arrayOfAnimals.length; i++) {
@@ -68,7 +66,7 @@ function checkConditions(animal: Animal, aviary: Aviary): string[] {
   return messages;
 }
 
-function addRemoveAnimal(animal: Animal, aviary: Aviary) {
+function addRemoveAnimal(animal: Animal, aviary: Aviary) { //функция для добавления и удаления(если есть животное с таким ид) в вольер
   const messages = checkConditions(animal, aviary);
   for (let i = 0; i < aviary.arrayOfAnimals.length; i++) {
     if (animal.id === aviary.arrayOfAnimals[i].id) {
@@ -90,6 +88,24 @@ function addRemoveAnimal(animal: Animal, aviary: Aviary) {
   }
   console.log(aviary.arrayOfAnimals.length);
 }
+
+function addAviaryToZoo(aviary: Aviary) { //добавление вольеров в зоопарк
+  zoo.push(aviary)
+}
+
+function countDayFood() { //подсчет еды во всем зоопарке
+  let sum = 0;
+  for(let aviary of zoo) {
+    for(let item of aviary.arrayOfAnimals) {
+      sum += item.dayFoodConsumption;
+    }
+  }
+  console.log(`You need ${sum} food for all zoo every day`)
+}
+
+//описание инстансов
+
+let zoo: Aviary[] = [];
 
 const bearMisha: Animal = {
   id: 1,
@@ -148,12 +164,15 @@ const tundraWithWater: Aviary = {
 const grasslandsWithoutWater: Aviary = {
   biome: Biome.Grasslands,
   waterPresence: true,
-  square: 100,
+  square: 200,
   arrayOfAnimals: [],
 };
 
+addAviaryToZoo(tundraWithWater);
+addAviaryToZoo(grasslandsWithoutWater)
 addRemoveAnimal(bearMisha, tundraWithWater);
-addRemoveAnimal(bearMansur, tundraWithWater);
+// addRemoveAnimal(bearMansur, tundraWithWater);
 addRemoveAnimal(bearMansur, tundraWithWater);
 addRemoveAnimal(giraffeSemen, grasslandsWithoutWater);
 addRemoveAnimal(giraffeNikita, grasslandsWithoutWater);
+countDayFood()
