@@ -3,11 +3,11 @@ var Biome;
 (function (Biome) {
     Biome["tundra"] = "Tundra";
     Biome["taiga"] = "Taiga";
-    Biome["deciduousForest"] = "DeciduousForest";
+    Biome["deciduousForest"] = "Deciduous forest";
     Biome["grasslands"] = "Grasslands";
     Biome["desert"] = "Desert";
-    Biome["highPlateaus"] = "HighPlateaus";
-    Biome["tropicalForest"] = "TropicalForest";
+    Biome["highPlateaus"] = "High plateaus";
+    Biome["tropicalForest"] = "Tropical forest";
 })(Biome || (Biome = {}));
 var KindOfAnimal;
 (function (KindOfAnimal) {
@@ -16,6 +16,19 @@ var KindOfAnimal;
     KindOfAnimal["beaver"] = "Beaver";
     KindOfAnimal["dolphin"] = "Dolphin";
 })(KindOfAnimal || (KindOfAnimal = {}));
+const modalImages = {
+    'bear': './images/bear.jpg',
+    'giraffe': './images/giraffe.jpg',
+    'beaver': './images/beaver.jpg',
+    'dolphin': './images/dolphin.jpg',
+    'tundra': './images/tundra.jpg',
+    'taiga': './images/taiga.jpg',
+    'deciduousforest': './images/deciduousforest.jpg',
+    'grasslands': './images/grasslands.jpg',
+    'desert': './images/desert.jpg',
+    'highplateaus': './images/highplateaus.jpg',
+    'tropicalforest': './images/tropicalforest.jpg',
+};
 var KindOfFood;
 (function (KindOfFood) {
     KindOfFood["fish"] = "Fish";
@@ -45,10 +58,10 @@ function checkConditions(animal, aviary) {
         messages.push(`${aviary.square - square} meters are missing in the aviary`);
     }
     if (animal.biome !== aviary.biome) {
-        messages.push('biomes not matched');
+        messages.push("biomes not matched");
     }
     if (animal.waterNecessity && !aviary.waterPresence) {
-        messages.push('biome does not have water');
+        messages.push("biome does not have water");
     }
     return [...new Set(messages)];
 }
@@ -98,7 +111,7 @@ const bearMisha = {
     spaceNecessity: 50,
     kindOfFood: KindOfFood.meat,
     diet: Diet.predator,
-    name: 'Misha',
+    name: "Misha",
     dayFoodConsumption: 5,
 };
 const bearMansur = {
@@ -109,7 +122,7 @@ const bearMansur = {
     spaceNecessity: 50,
     kindOfFood: KindOfFood.meat,
     diet: Diet.predator,
-    name: 'Mansur',
+    name: "Mansur",
     dayFoodConsumption: 5,
 };
 const giraffeSemen = {
@@ -120,7 +133,7 @@ const giraffeSemen = {
     spaceNecessity: 70,
     kindOfFood: KindOfFood.leaf,
     diet: Diet.herbivorous,
-    name: 'Semen',
+    name: "Semen",
     dayFoodConsumption: 10,
 };
 const giraffeNikita = {
@@ -131,7 +144,7 @@ const giraffeNikita = {
     spaceNecessity: 80,
     kindOfFood: KindOfFood.leaf,
     diet: Diet.herbivorous,
-    name: 'Nikita',
+    name: "Nikita",
     dayFoodConsumption: 8,
 };
 const tundraWithWater = {
@@ -149,7 +162,6 @@ const grasslandsWithoutWater = {
 addAviaryToZoo(tundraWithWater);
 addAviaryToZoo(grasslandsWithoutWater);
 addRemoveAnimal(bearMisha, tundraWithWater);
-// addRemoveAnimal(bearMansur, tundraWithWater);
 addRemoveAnimal(bearMansur, tundraWithWater);
 addRemoveAnimal(giraffeSemen, tundraWithWater);
 addRemoveAnimal(giraffeNikita, grasslandsWithoutWater);
@@ -157,39 +169,47 @@ addRemoveAnimal(bearMisha, grasslandsWithoutWater);
 countDayFood();
 //in progress
 function showModalWindow() {
-    const modalWindow = document.querySelector('.modal-window');
+    const modalWindow = document.querySelector(".modal-window");
     if (modalWindow !== null) {
-        modalWindow.classList.add('visible');
+        modalWindow.classList.add("visible");
     }
 }
-function cancelAddingAnimals() {
-    const modalWindow = document.querySelector('.modal-window');
-    const modalContainer = document.querySelector('.modal-container');
+function cancelAdding() {
+    const modalWindow = document.querySelector(".modal-window");
+    const modalContainer = document.querySelector(".modal-container");
     if (modalWindow !== null && modalContainer !== null) {
-        modalWindow.classList.remove('visible');
-        modalContainer.innerHTML = '';
+        modalWindow.classList.remove("visible");
+        modalContainer.innerHTML = "";
     }
 }
-function cancelAddingAviary() {
-    const modalWindow = document.querySelector('.modal-window');
-    const modalContainer = document.querySelector('.aviary-container');
-    if (modalWindow !== null && modalContainer !== null) {
-        modalWindow.classList.remove('visible');
-        modalContainer.innerHTML = '';
+function changeImage() {
+    const container = document.querySelector(".modal-container");
+    const image = container === null || container === void 0 ? void 0 : container.querySelector('img');
+    if (container !== null) {
+        const secondChild = container.children[1];
+        const select = secondChild.querySelector("select");
+        select === null || select === void 0 ? void 0 : select.addEventListener('change', function () {
+            const selectedElement = this.value.replace(/\s+/g, '').toLowerCase();
+            console.log(selectedElement);
+            console.log(modalImages[selectedElement]);
+            if (image) {
+                image.src = modalImages[selectedElement];
+            }
+        });
     }
 }
 function createSelect(enumObj) {
-    let selectString = `<select class='biome-select'>`;
+    let selectString = `<select>`;
     for (const key in enumObj) {
         selectString += `<option value='${enumObj[key]}'>${enumObj[key]}</option>`;
     }
-    selectString += '</select>';
+    selectString += "</select>";
     return selectString;
 }
 function addAnimal() {
-    const modalContainer = document.querySelector('.modal-container');
+    const modalContainer = document.querySelector(".modal-container");
     const markup = `<div class='images-container'>
-<img src='./images/bear.jpg' alt='bear'>
+<img src='./images/bear.jpg' alt=''>
 </div>
 <div class='question-container'>
 <span>What species?</span>
@@ -201,7 +221,7 @@ ${createSelect(Biome)}
 </div>
 <div class='question-container'>
 <span>Is this animal need water?</span>
-<select class='biome-select'>
+<select>
 <option value='Yes'>Yes</option>
 <option value='No'>No</option>
 </select>
@@ -230,23 +250,23 @@ ${createSelect(Diet)}
 <button class="confirm" onclick='confirmAdding()'>
     Добавить
 </button>
-<button class="cancel" onclick='cancelAddingAnimals()'>
+<button class="cancel" onclick='cancelAdding()'>
     Отменить
 </button>
 </div>`;
     if (modalContainer !== null) {
-        modalContainer.insertAdjacentHTML('afterbegin', markup);
-        // modalContainer.innerHTML = markup;
+        modalContainer.insertAdjacentHTML("afterbegin", markup);
     }
     else {
-        console.log('modal-container not found');
+        console.log("modal-container not found");
     }
+    changeImage();
     showModalWindow();
 }
 function addAviary() {
-    const modalContainer = document.querySelector('.modal-container');
+    const modalContainer = document.querySelector(".modal-container");
     const markup = `<div class='images-container'>
-<img src='./images/grasslands.jpg' alt='grasslands'>
+<img src='./images/grasslands.jpg' alt=''>
 </div>
 <div class='question-container'>
 <span>Choose biome</span>
@@ -254,7 +274,7 @@ ${createSelect(Biome)}
 </div>
 <div class='question-container'>
 <span>Does this biome have water?</span>
-<select class='biome-select'>
+<select>
 <option value='Yes'>Yes</option>
 <option value='No'>No</option>
 </select>
@@ -267,16 +287,16 @@ ${createSelect(Biome)}
 <button class="confirm" onclick='confirmAdding()'>
     Добавить
 </button>
-<button class="cancel" onclick='cancelAddingAnimals()'>
+<button class="cancel" onclick='cancelAdding()'>
     Отменить
 </button>
 </div>`;
     if (modalContainer !== null) {
-        modalContainer.insertAdjacentHTML('afterbegin', markup);
-        // modalContainer.innerHTML = markup;
+        modalContainer.insertAdjacentHTML("afterbegin", markup);
     }
     else {
-        console.log('modal-container not found');
+        console.log("modal-container not found");
     }
+    changeImage();
     showModalWindow();
 }
