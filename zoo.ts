@@ -1,18 +1,18 @@
 ﻿enum Biome { // разновидность биомов
-  tundra = "Tundra",
-  taiga = "Taiga",
-  deciduousForest = "Deciduous forest",
-  grasslands = "Grasslands",
-  desert = "Desert",
-  highPlateaus = "High plateaus",
-  tropicalForest = "Tropical forest",
+  Tundra = "Tundra",
+  Taiga = "Taiga",
+  DeciduousForest = "Deciduous forest",
+  Grasslands = "Grasslands",
+  Desert = "Desert",
+  HighPlateaus = "High plateaus",
+  TropicalForest = "Tropical forest",
 }
 
 enum KindOfAnimal {
-  bear = "Bear",
-  giraffe = "Giraffe",
-  beaver = "Beaver",
-  dolphin = "Dolphin",
+  Bear = "Bear",
+  Giraffe = "Giraffe",
+  Beaver = "Beaver",
+  Dolphin = "Dolphin",
 }
 
 const modalImages: { [key: string]: string } = {
@@ -31,14 +31,14 @@ const modalImages: { [key: string]: string } = {
 
 
 enum KindOfFood {
-  fish = "Fish",
-  leaf = "Leaf",
-  meat = "Meat",
+  Fish = "Fish",
+  Leaf = "Leaf",
+  Meat = "Meat",
 }
 
 enum Diet { //хищник или травоядный
-  predator = "Predator",
-  herbivorous = "Herbivorous",
+  Predator = "Predator",
+  Herbivorous = "Herbivorous",
 }
 
 interface Aviary {
@@ -102,7 +102,7 @@ function checkConditions(animal: Animal, aviary: Aviary): string[] {
 function addRemoveAnimal(animal: Animal, aviary: Aviary) {
   //функция для добавления и удаления(если есть животное с таким ид) в вольер
   const messages = checkConditions(animal, aviary);
-  for (let i = 0; i < aviary.arrayOfAnimals.length; i++) {
+  for (let i = 0; i < aviary.arrayOfAnimals.length; i++) { //поправить на фильтр и замену изначального массива
     if (animal.id === aviary.arrayOfAnimals[i].id) {
       console.log(
         `${aviary.arrayOfAnimals[i].nameOfSpecies} ${aviary.arrayOfAnimals[i].name} deleted`
@@ -128,7 +128,7 @@ function addAviaryToZoo(aviary: Aviary) {
   zoo.push(aviary);
 }
 
-function countDayFood() {
+function countDayFood() {//переделать на reduce
   //подсчет еды во всем зоопарке
   let sum = 0;
   for (let aviary of zoo) {
@@ -145,60 +145,60 @@ let zoo: Aviary[] = [];
 
 const bearMisha: Animal = {
   id: 1,
-  nameOfSpecies: KindOfAnimal.bear,
-  biome: Biome.tundra,
+  nameOfSpecies: KindOfAnimal.Bear,
+  biome: Biome.Tundra,
   waterNecessity: false,
   spaceNecessity: 50,
-  kindOfFood: KindOfFood.meat,
-  diet: Diet.predator,
+  kindOfFood: KindOfFood.Meat,
+  diet: Diet.Predator,
   name: "Misha",
   dayFoodConsumption: 5,
 };
 
 const bearMansur: Animal = {
   id: 2,
-  nameOfSpecies: KindOfAnimal.bear,
-  biome: Biome.tundra,
+  nameOfSpecies: KindOfAnimal.Bear,
+  biome: Biome.Tundra,
   waterNecessity: false,
   spaceNecessity: 50,
-  kindOfFood: KindOfFood.meat,
-  diet: Diet.predator,
+  kindOfFood: KindOfFood.Meat,
+  diet: Diet.Predator,
   name: "Mansur",
   dayFoodConsumption: 5,
 };
 const giraffeSemen: Animal = {
   id: 3,
-  nameOfSpecies: KindOfAnimal.giraffe,
-  biome: Biome.grasslands,
+  nameOfSpecies: KindOfAnimal.Giraffe,
+  biome: Biome.Grasslands,
   waterNecessity: false,
   spaceNecessity: 70,
-  kindOfFood: KindOfFood.leaf,
-  diet: Diet.herbivorous,
+  kindOfFood: KindOfFood.Leaf,
+  diet: Diet.Herbivorous,
   name: "Semen",
   dayFoodConsumption: 10,
 };
 
 const giraffeNikita: Animal = {
   id: 4,
-  nameOfSpecies: KindOfAnimal.giraffe,
-  biome: Biome.grasslands,
+  nameOfSpecies: KindOfAnimal.Giraffe,
+  biome: Biome.Grasslands,
   waterNecessity: true,
   spaceNecessity: 80,
-  kindOfFood: KindOfFood.leaf,
-  diet: Diet.herbivorous,
+  kindOfFood: KindOfFood.Leaf,
+  diet: Diet.Herbivorous,
   name: "Nikita",
   dayFoodConsumption: 8,
 };
 
 const tundraWithWater: Aviary = {
-  biome: Biome.tundra,
+  biome: Biome.Tundra,
   waterPresence: true,
   square: 250,
   arrayOfAnimals: [],
 };
 
 const grasslandsWithoutWater: Aviary = {
-  biome: Biome.grasslands,
+  biome: Biome.Grasslands,
   waterPresence: true,
   square: 200,
   arrayOfAnimals: [],

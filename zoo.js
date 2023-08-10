@@ -1,20 +1,20 @@
 "use strict";
 var Biome;
 (function (Biome) {
-    Biome["tundra"] = "Tundra";
-    Biome["taiga"] = "Taiga";
-    Biome["deciduousForest"] = "Deciduous forest";
-    Biome["grasslands"] = "Grasslands";
-    Biome["desert"] = "Desert";
-    Biome["highPlateaus"] = "High plateaus";
-    Biome["tropicalForest"] = "Tropical forest";
+    Biome["Tundra"] = "Tundra";
+    Biome["Taiga"] = "Taiga";
+    Biome["DeciduousForest"] = "Deciduous forest";
+    Biome["Grasslands"] = "Grasslands";
+    Biome["Desert"] = "Desert";
+    Biome["HighPlateaus"] = "High plateaus";
+    Biome["TropicalForest"] = "Tropical forest";
 })(Biome || (Biome = {}));
 var KindOfAnimal;
 (function (KindOfAnimal) {
-    KindOfAnimal["bear"] = "Bear";
-    KindOfAnimal["giraffe"] = "Giraffe";
-    KindOfAnimal["beaver"] = "Beaver";
-    KindOfAnimal["dolphin"] = "Dolphin";
+    KindOfAnimal["Bear"] = "Bear";
+    KindOfAnimal["Giraffe"] = "Giraffe";
+    KindOfAnimal["Beaver"] = "Beaver";
+    KindOfAnimal["Dolphin"] = "Dolphin";
 })(KindOfAnimal || (KindOfAnimal = {}));
 const modalImages = {
     'bear': './images/bear.jpg',
@@ -31,14 +31,14 @@ const modalImages = {
 };
 var KindOfFood;
 (function (KindOfFood) {
-    KindOfFood["fish"] = "Fish";
-    KindOfFood["leaf"] = "Leaf";
-    KindOfFood["meat"] = "Meat";
+    KindOfFood["Fish"] = "Fish";
+    KindOfFood["Leaf"] = "Leaf";
+    KindOfFood["Meat"] = "Meat";
 })(KindOfFood || (KindOfFood = {}));
 var Diet;
 (function (Diet) {
-    Diet["predator"] = "Predator";
-    Diet["herbivorous"] = "Herbivorous";
+    Diet["Predator"] = "Predator";
+    Diet["Herbivorous"] = "Herbivorous";
 })(Diet || (Diet = {}));
 function checkConditions(animal, aviary) {
     //функция для проверки на все условия
@@ -105,56 +105,56 @@ function countDayFood() {
 let zoo = [];
 const bearMisha = {
     id: 1,
-    nameOfSpecies: KindOfAnimal.bear,
-    biome: Biome.tundra,
+    nameOfSpecies: KindOfAnimal.Bear,
+    biome: Biome.Tundra,
     waterNecessity: false,
     spaceNecessity: 50,
-    kindOfFood: KindOfFood.meat,
-    diet: Diet.predator,
+    kindOfFood: KindOfFood.Meat,
+    diet: Diet.Predator,
     name: "Misha",
     dayFoodConsumption: 5,
 };
 const bearMansur = {
     id: 2,
-    nameOfSpecies: KindOfAnimal.bear,
-    biome: Biome.tundra,
+    nameOfSpecies: KindOfAnimal.Bear,
+    biome: Biome.Tundra,
     waterNecessity: false,
     spaceNecessity: 50,
-    kindOfFood: KindOfFood.meat,
-    diet: Diet.predator,
+    kindOfFood: KindOfFood.Meat,
+    diet: Diet.Predator,
     name: "Mansur",
     dayFoodConsumption: 5,
 };
 const giraffeSemen = {
     id: 3,
-    nameOfSpecies: KindOfAnimal.giraffe,
-    biome: Biome.grasslands,
+    nameOfSpecies: KindOfAnimal.Giraffe,
+    biome: Biome.Grasslands,
     waterNecessity: false,
     spaceNecessity: 70,
-    kindOfFood: KindOfFood.leaf,
-    diet: Diet.herbivorous,
+    kindOfFood: KindOfFood.Leaf,
+    diet: Diet.Herbivorous,
     name: "Semen",
     dayFoodConsumption: 10,
 };
 const giraffeNikita = {
     id: 4,
-    nameOfSpecies: KindOfAnimal.giraffe,
-    biome: Biome.grasslands,
+    nameOfSpecies: KindOfAnimal.Giraffe,
+    biome: Biome.Grasslands,
     waterNecessity: true,
     spaceNecessity: 80,
-    kindOfFood: KindOfFood.leaf,
-    diet: Diet.herbivorous,
+    kindOfFood: KindOfFood.Leaf,
+    diet: Diet.Herbivorous,
     name: "Nikita",
     dayFoodConsumption: 8,
 };
 const tundraWithWater = {
-    biome: Biome.tundra,
+    biome: Biome.Tundra,
     waterPresence: true,
     square: 250,
     arrayOfAnimals: [],
 };
 const grasslandsWithoutWater = {
-    biome: Biome.grasslands,
+    biome: Biome.Grasslands,
     waterPresence: true,
     square: 200,
     arrayOfAnimals: [],
@@ -190,8 +190,6 @@ function changeImage() {
         const select = secondChild.querySelector("select");
         select === null || select === void 0 ? void 0 : select.addEventListener('change', function () {
             const selectedElement = this.value.replace(/\s+/g, '').toLowerCase();
-            console.log(selectedElement);
-            console.log(modalImages[selectedElement]);
             if (image) {
                 image.src = modalImages[selectedElement];
             }
